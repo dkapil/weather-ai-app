@@ -9,6 +9,9 @@ load_dotenv()
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 http_client = httpx.Client(verify=False)
 
+print("CWD:", os.getcwd())
+print("ENV:", os.getenv("OPENAI_API_KEY"))
+print("API KEY:", os.getenv("OPENAI_API_KEY"))
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), http_client=http_client)
 
 def extract_city(user_input):
