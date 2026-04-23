@@ -2,10 +2,15 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 import re
+import httpx
+import urllib3
 
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+http_client = httpx.Client(verify=False)
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), http_client=http_client)
 
 
 def agent_step(history):
