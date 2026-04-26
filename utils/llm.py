@@ -14,6 +14,7 @@ print("ENV:", os.getenv("OPENAI_API_KEY"))
 print("API KEY:", os.getenv("OPENAI_API_KEY"))
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), http_client=http_client)
 
+
 def extract_city(user_input):
     prompt = f"""
 Extract the city name from the input.
@@ -25,7 +26,7 @@ Input: {user_input}
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0
+        temperature=0,
     )
 
     return response.choices[0].message.content.strip()

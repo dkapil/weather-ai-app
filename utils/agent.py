@@ -30,7 +30,7 @@ User Input: {user_input}
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0
+        temperature=0,
     )
 
     return response.choices[0].message.content
@@ -54,14 +54,14 @@ Explain your reasoning briefly.
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0
+        temperature=0,
     )
 
     return response.choices[0].message.content
 
 
 def parse_action(text):
-    match = re.search(r'get_weather\((.*?)\)', text)
+    match = re.search(r"get_weather\((.*?)\)", text)
     if match:
         return match.group(1).strip().strip('"').strip("'")
     return None

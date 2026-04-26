@@ -10,7 +10,7 @@ while True:
 
     # TEMP: naive extraction
     city = extract_city(user_input)
-    
+
     result = get_weather(city)
 
     print(result)

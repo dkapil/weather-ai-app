@@ -15,12 +15,11 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), http_client=http_client)
 
 def agent_step(history):
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=history,
-        temperature=0
+        model="gpt-4o-mini", messages=history, temperature=0
     )
 
     return response.choices[0].message.content
+
 
 def final_step(user_input, observation):
     prompt = f"""
@@ -73,25 +72,24 @@ Final Answer: <your answer>
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.3
+        temperature=0.3,
     )
 
     return response.choices[0].message.content
 
+
 def parse_action(text):
-    match = re.search(r'Action:\s*(\w+)\((.*?)\)', text)
+    match = re.search(r"Action:\s*(\w+)\((.*?)\)", text)
     if match:
         tool = match.group(1)
         arg = match.group(2).strip().strip('"').strip("'")
         return tool, arg
     return None, None
 
+
 def is_valid_action(output: str) -> bool:
-    return (
-        "Action:" in output and
-        (
-            "get_weather(" in output or
-            "get_time(" in output or
-            "get_air_quality(" in output
-        )
+    return "Action:" in output and (
+        "get_weather(" in output
+        or "get_time(" in output
+        or "get_air_quality(" in output
     )

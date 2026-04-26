@@ -21,7 +21,7 @@ while True:
         print("Observation:", result)
 
         # Step 3: LLM generates final answer using real observation
-        final_output=final_step(user_input,observation=result)
+        final_output = final_step(user_input, observation=result)
         print(final_output)
     else:
         print("No valid action found")

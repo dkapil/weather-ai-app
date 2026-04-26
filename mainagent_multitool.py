@@ -6,7 +6,7 @@ from tools.air_quality import get_air_quality
 TOOLS = {
     "get_weather": get_weather,
     "get_time": get_time,
-    "get_air_quality": get_air_quality
+    "get_air_quality": get_air_quality,
 }
 
 print("Agent starting...")
@@ -56,7 +56,7 @@ Do NOT:
 - generate Final Answer
 - skip Thought or Action
 - invent tools
-"""
+""",
     }
 ]
 
@@ -69,10 +69,7 @@ while True:
         break
 
     # Step 1: Add user input to global history
-    history.append({
-        "role": "user",
-        "content": user_input
-    })
+    history.append({"role": "user", "content": user_input})
 
     # 🔥 IMPORTANT: Create local copy for reasoning (retry loop)
     retry_history = history.copy()
@@ -83,16 +80,18 @@ while True:
     retry_count = 0
 
     # Step 3: Retry loop (uses ONLY retry_history)
-    while "Action:" in step_output and not is_valid_action(step_output) and retry_count < MAX_RETRIES:
+    while (
+        "Action:" in step_output
+        and not is_valid_action(step_output)
+        and retry_count < MAX_RETRIES
+    ):
 
-        retry_history.append({
-            "role": "assistant",
-            "content": step_output
-        })
+        retry_history.append({"role": "assistant", "content": step_output})
 
-        retry_history.append({
-            "role": "system",
-            "content": """
+        retry_history.append(
+            {
+                "role": "system",
+                "content": """
 Your previous response was invalid.
 
 You MUST follow this format strictly:
@@ -110,8 +109,9 @@ Rules:
 - Do NOT skip Action
 - Do NOT invent new tools
 - Only fix the format. Do not change the original intent.
-"""
-        })
+""",
+            }
+        )
 
         step_output = agent_step(retry_history)
         retry_count += 1
@@ -132,10 +132,7 @@ Rules:
         print(final_output)
 
         # ✅ ONLY final answer goes into global history
-        history.append({
-            "role": "assistant",
-            "content": final_output
-        })
+        history.append({"role": "assistant", "content": final_output})
 
     else:
         # No action (clarification / refusal case)

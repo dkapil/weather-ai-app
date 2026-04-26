@@ -10,9 +10,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def agent_step(history):
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=history,
-        temperature=0
+        model="gpt-4o-mini", messages=history, temperature=0
     )
 
     return response.choices[0].message.content
@@ -43,14 +41,14 @@ Final Answer: <your answer>
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.7
+        temperature=0.7,
     )
 
     return response.choices[0].message.content
 
 
 def parse_action(text):
-    match = re.search(r'get_weather\((.*?)\)', text)
+    match = re.search(r"get_weather\((.*?)\)", text)
     if match:
         return match.group(1).strip().strip('"').strip("'")
     return None
