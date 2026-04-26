@@ -3,9 +3,12 @@ import requests
 
 API_KEY = os.getenv("WEATHER_API_KEY")
 
+
 def get_air_quality(city):
     try:
-        url = f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}&aqi=yes"
+        url = (
+            f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}&aqi=yes"
+        )
 
         resp = requests.get(url)
 
@@ -22,7 +25,7 @@ def get_air_quality(city):
             "city": data["location"]["name"],
             "aqi_pm2_5": aqi_data.get("pm2_5"),
             "aqi_pm10": aqi_data.get("pm10"),
-            "co": aqi_data.get("co")
+            "co": aqi_data.get("co"),
         }
 
     except Exception as e:
