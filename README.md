@@ -61,6 +61,56 @@ Final Answer (via LLM)
 ├── .env                     # API keys
 └── README.md
 ```
+---
+
+## 🧪 Agent Variants (Evolution of the System)
+
+This repository contains multiple versions of the agent, capturing the step-by-step evolution from a simple LLM to a tool-using agent.
+
+### 📂 Variants Overview
+
+| File                       | Description                                            |
+| -------------------------- | ------------------------------------------------------ |
+| `mainllm.py`               | Basic LLM interaction (no tools, no agent logic)       |
+| `mainagent.py`             | Introduction to agent pattern (LLM + basic tool usage) |
+| `mainagenthistory.py`      | Agent with conversation memory (context-aware)         |
+| `mainagenthistoryretry.py` | Adds retry mechanism for invalid LLM outputs           |
+| `mainagent_multitool.py`   | Current version: multi-tool agent (weather, time, AQI) |
+
+---
+
+### 🧠 Evolution Journey
+
+```text id="evolution_flow"
+LLM → Agent → Agent + Memory → Agent + Retry → Multi-Tool Agent
+```
+
+---
+
+### 🔍 Why multiple versions?
+
+Each version isolates a key concept:
+
+* **`mainllm.py`** → Understand raw LLM behavior
+* **`mainagent.py`** → Introduce Thought/Action pattern
+* **`mainagenthistory.py`** → Add memory (state)
+* **`mainagenthistoryretry.py`** → Add robustness (retry/validation)
+* **`mainagent_multitool.py`** → Scale to multiple tools
+---
+
+### 🎯 Recommended Entry Point
+
+If you're exploring the project:
+
+* Start with → `mainllm.py`
+* Then → `mainagent.py`
+* Finally → `mainagent_multitool.py` (latest)
+
+---
+
+### ⚠️ Note
+
+Older variants are intentionally kept for learning purposes and may not include the latest improvements.
 
 ---
 
