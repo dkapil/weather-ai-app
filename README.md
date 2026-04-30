@@ -19,24 +19,6 @@ A simple but powerful **agentic AI system** built using the **ReAct pattern**, c
 
 ---
 
-## 🧩 Architecture Overview
-
-```text
-User Input
-   ↓
-Agent (LLM)
-   ↓
-Thought → Action
-   ↓
-Tool Execution
-   ↓
-Observation
-   ↓
-Final Answer (via LLM)
-```
-
----
-
 ## 🛠️ Tools
 
 | Tool                    | Description               |
@@ -47,55 +29,42 @@ Final Answer (via LLM)
 
 ---
 
-## 📁 Project Structure
-
-```text
-.
-├── mainagent_multitool.py   # Main loop (agent execution)
-├── utils/
-│   └── agent_multitool.py  # LLM interaction, parsing, validation
-├── tools/
-│   ├── weather.py
-│   ├── time.py
-│   └── air_quality.py
-├── .env                     # API keys
-└── README.md
-```
----
-
 ## 🧪 Agent Variants (Evolution of the System)
 
-This repository contains multiple versions of the agent, capturing the step-by-step evolution from a simple LLM to a tool-using agent.
+This repository contains multiple agent variants, capturing the step-by-step evolution from a simple LLM to a multi-step ReAct agent.
 
 ### 📂 Variants Overview
 
-| File                       | Description                                            |
-| -------------------------- | ------------------------------------------------------ |
-| `mainllm.py`               | Basic LLM interaction (no tools, no agent logic)       |
-| `mainagent.py`             | Introduction to agent pattern (LLM + basic tool usage) |
-| `mainagenthistory.py`      | Agent with conversation memory (context-aware)         |
-| `mainagenthistoryretry.py` | Adds retry mechanism for invalid LLM outputs           |
-| `mainagent_multitool.py`   | Current version: multi-tool agent (weather, time, AQI) |
+| File                                  | Description                              |
+| ------------------------------------- | ---------------------------------------- |
+| `mainllm.py`                          | Basic LLM interaction (no tools)         |
+| `basic_agent.py`                      | First agent with single tool usage       |
+| `history_agent.py`                    | Adds conversation memory                 |
+| `history_retry_agent.py`              | Adds retry mechanism for invalid outputs |
+| `multitool_agent.py`                  | Supports multiple tools                  |
+| `multitool_multistep_agent.py`        | Final multi-step ReAct agent          |
 
 ---
 
 ### 🧠 Evolution Journey
 
 ```text id="evolution_flow"
-LLM → Agent → Agent + Memory → Agent + Retry → Multi-Tool Agent
+LLM → Agent → Memory → Retry → Multi-Tool → Multi-Step (ReAct)
 ```
 
 ---
 
 ### 🔍 Why multiple versions?
 
-Each version isolates a key concept:
+Each variant isolates a key concept:
 
-* **`mainllm.py`** → Understand raw LLM behavior
-* **`mainagent.py`** → Introduce Thought/Action pattern
-* **`mainagenthistory.py`** → Add memory (state)
-* **`mainagenthistoryretry.py`** → Add robustness (retry/validation)
-* **`mainagent_multitool.py`** → Scale to multiple tools
+* **`mainllm.py`** → Raw LLM behavior
+* **`basic_agent.py`** → Thought/Action pattern
+* **`history_agent.py`** → Memory (state)
+* **`history_retry_agent.py`** → Robustness (retry/validation)
+* **`multitool_agent.py`** → Tool selection across multiple tools
+* **`multitool_multistep_agent.py`** → Iterative reasoning + multi-step execution
+
 ---
 
 ### 🎯 Recommended Entry Point
@@ -103,8 +72,8 @@ Each version isolates a key concept:
 If you're exploring the project:
 
 * Start with → `mainllm.py`
-* Then → `mainagent.py`
-* Finally → `mainagent_multitool.py` (latest)
+* Then → `basic_agent.py`
+* Finally → `multitool_multistep_agent.py` (latest)
 
 ---
 
@@ -151,7 +120,7 @@ TIMEZONEDB_API_KEY=your_timezonedb_key
 ## ▶️ Run the Agent
 
 ```bash
-python mainagent_multitool.py
+python multitool_multistep_agent.py
 ```
 
 ---
@@ -167,7 +136,3 @@ is delhi polluted
 do i need a jacket in tokyo
 should I go outside in delhi
 ```
----
-## 🙌 Contributions
-
-Open to improvements, ideas, and experiments.
