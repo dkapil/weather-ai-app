@@ -1,4 +1,4 @@
-from utils.agent import agent_step, final_step, parse_action
+from agents.basic import agent_step, final_step, parse_action
 from tools.weather import get_weather
 
 print("Agent starting...")
