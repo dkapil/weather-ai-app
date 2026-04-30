@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from agents.multitool_multistep import (
+from agents.multitool_multistep_agent import (
     agent_step,
     final_step,
     parse_action,
@@ -62,6 +62,11 @@ Rules:
   - Treat PM2.5 and PM10 as particulate matter measurements
   - Do NOT refer to PM2.5 or PM10 values as "AQI"
   - Only use the term "AQI" if it is explicitly present in the tool output
+
+When specifying a city:
+- Prefer well-known global cities
+- If a city name is ambiguous, include country (e.g., "Delhi, India", "Paris, France")
+- Avoid using short or ambiguous location names without context
 
 Output format (STRICT):
 Thought: <your reasoning>

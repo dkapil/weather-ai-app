@@ -1,11 +1,13 @@
 import os
 import requests
+from utils.location import normalize_city
 
 API_KEY = os.getenv("WEATHER_API_KEY")
 
 
 def get_air_quality(city):
     try:
+        city = normalize_city(city)
         url = (
             f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}&aqi=yes"
         )

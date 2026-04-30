@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+from utils.location import normalize_city
 
 load_dotenv()
 
@@ -8,6 +9,7 @@ API_KEY = os.getenv("WEATHER_API_KEY")
 
 
 def get_weather(city):
+    city = normalize_city(city)
     url = "http://api.weatherapi.com/v1/current.json"
 
     params = {"key": API_KEY, "q": city}
