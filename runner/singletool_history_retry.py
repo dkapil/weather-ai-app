@@ -1,4 +1,9 @@
-from agents.history_retry import (
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from agents.history_retry_agent import (
     agent_step,
     final_step,
     parse_action,

@@ -1,4 +1,9 @@
-from agents.history import agent_step, final_step, parse_action
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from agents.history_agent import agent_step, final_step, parse_action
 from tools.weather import get_weather
 
 print("Agent starting...")
