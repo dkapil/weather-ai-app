@@ -12,8 +12,6 @@ def get_time(city):
 
         resp = requests.get(url)
 
-        print("\n[DEBUG] TIME API:", resp.text)
-
         data = resp.json()
 
         # Validate response
