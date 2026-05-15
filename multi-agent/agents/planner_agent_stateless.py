@@ -14,7 +14,7 @@ client = OpenAI(
 )
 
 
-def create_plan(state: dict):
+def create_plan(user_query: str):
 
     system_prompt = """
 You are a planning agent.
@@ -56,26 +56,6 @@ If city is ambiguous:
 If query is unrelated:
 → refuse
 
-You may receive:
-- existing observations
-- critic feedback
-
-Rules:
-
-- If observations already contain required information:
-  - Do NOT generate duplicate tasks
-
-- If critic feedback mentions missing information:
-  - Generate ONLY the missing tasks
-
-- Avoid calling the same tool again for the same city unless necessary
-
--Existing observations are the source of truth.
-
--Before generating a task:
-  - Check whether the required tool result already exists
-  - Never generate duplicate tasks for the same city
-
 Output format (STRICT JSON ONLY)
 
 PLAN FORMAT:
@@ -107,19 +87,7 @@ REFUSAL FORMAT:
         temperature=0,
         messages=[
             {"role": "system", "content": system_prompt},
-            {
-                "role": "user",
-                "content": f"""
-Query:
-{state["query"]}
-
-Existing Observations:
-{json.dumps(state["observations"], indent=2)}
-
-Critic Feedback:
-{state["critic_feedback"]}
-""",
-            },
+            {"role": "user", "content": user_query},
         ],
     )
 

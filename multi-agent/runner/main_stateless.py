@@ -4,7 +4,6 @@ import json
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from shared.state import create_state
 from agents.planner_agent import create_plan
 from agents.critic_agent import review
 from core.executor import execute_plan
@@ -21,18 +20,10 @@ while True:
     if query.lower() == "exit":
         break
 
-    state = create_state(query)
-
-    print("\nINITIAL STATE:")
-    printj(state)
-
-    planner_output = create_plan(state)
+    planner_output = create_plan(query)
 
     print("\nPLANNER:")
     printj(planner_output)
-
-    if planner_output["type"] != "plan":
-        continue
 
     if planner_output["type"] == "clarification":
 
@@ -48,15 +39,12 @@ while True:
 
         continue
 
-    observations = execute_plan(state, planner_output["tasks"])
+    observations = execute_plan(planner_output["tasks"])
 
     print("\nOBSERVATIONS:")
     printj(observations)
 
-    critic_output = review(
-        state["query"],
-        state["observations"],
-    )
+    critic_output = review(query, observations)
 
     print("\nCRITIC:")
     printj(critic_output)

@@ -9,7 +9,7 @@ TOOLS = {
 }
 
 
-def execute_plan(state, tasks):
+def execute_plan(tasks):
 
     observations = []
 
@@ -29,6 +29,5 @@ def execute_plan(state, tasks):
         result = TOOLS[tool_name](tool_input)
 
         observations.append({"tool": tool_name, "input": tool_input, "result": result})
-        state["observations"].extend(observations)
 
     return observations
